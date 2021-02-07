@@ -12,6 +12,12 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     
+    protected function validateData(){
+      return request()->validate([ 'body'=> 'required', 'post_id' => 'required']);
+      
+    }
+    
     public function index()
     {
         //
@@ -37,8 +43,8 @@ class CommentController extends Controller
     {
     
       
-      $data = request()->validate([ 'body'=> 'required', 'post_id' => 'required']);
-      auth()->user()->comment()->create($data);
+      
+      auth()->user()->comment()->create($this->validateData());
       $id = request('post_id');
       return redirect('/post/'.$id);
     }

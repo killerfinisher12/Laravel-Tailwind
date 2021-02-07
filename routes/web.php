@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/try', 'ProfilesController@try');
@@ -29,29 +30,35 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile/{user}', 'ProfilesController@index');
 
 Route::get('/post/create', 'PostsController@create');
-
 Route::post('/post', 'PostsController@store');
-
 Route::get('/post/{user}', 'PostsController@show');
-
 Route::delete('/post/{user}/delete', 'PostsController@destroy');
 
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
-
 Route::patch('/profile/{user}', 'ProfilesController@update');
 
 Route::post('/comment', 'CommentController@store');
 
-Route::get('/lol', 'ReplyController@show');
+
 
 //code for reply
 Route::post('/reply', 'ReplyController@store');
-
-Route::get('/reply/{id}', 'ReplyController@create')->middleware('auth');
+Route::get('/reply/{comment}', 'ReplyController@create')->middleware('auth');
 
 // Code for like post
 //Route::post('/likepost', 'LikePostController@store');
-Route::post('/likepost', 'FollowController@store');
+Route::post('/likepost', 'LikePostController@store');
 
 // Code for comment post
 Route::post('/likecomment', 'LikeCommentController@store');
+
+//for FollowController
+Route::post('/follow', 'FollowController@store')->middleware('auth');
+
+Route::post('/follow/{user}', 'FollowController@store')->middleware('auth');
+
+
+Auth::routes();
+
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

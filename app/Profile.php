@@ -12,7 +12,7 @@ class Profile extends Model
 	return $this->belongsTo(User::class);
 	}
 	
-/*	public function post(){
-	  return $this->hasMany(Post::class);
-	}*/
+	public function follow(){
+	  return $this->belongsToMany(User::class);
+	}
 }

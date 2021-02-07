@@ -72,7 +72,11 @@ class User extends Authenticatable
       return $this->belongsToMany(Comment::class);
     }
     
-    public function follow(){
-      return $this->belongsToMany(Post::class);
+    public function likepost(){
+      return $this->belongsToMany(Post::class)->withPivot('user_id', 'post_id');
+    }
+    
+    public function following(){
+      return $this->belongsToMany(Profile::class);
     }
 }

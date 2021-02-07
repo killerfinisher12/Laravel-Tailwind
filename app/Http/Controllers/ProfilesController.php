@@ -18,8 +18,11 @@ class ProfilesController extends Controller
     return redirect('/')->with('msg', 'This is a session');
   }
   
-	public function index($user) {
-		$user = User::findOrFail($user);
+  
+  
+	public function index(User $user) {
+	//	$user = User::findOrFail($user);
+		//dd(User::find(3)->following()->where('profile_user.user_id', 3)->get());
 		return view('profile' , ['user' => $user]);
 	}
 
@@ -31,22 +34,25 @@ class ProfilesController extends Controller
 
 	public function update(User $user){
 	  
-	$data = request()->validate([
-		'title' => 'required',
-		'description' => 'required',
-		'url' => 'url',
-		'image', '' ]);
 
 	if(request('image')){
-	$imgPath = request('image')->store('uploads', 'public');
+	$imgPath = request('image')->store('profiles', 'public');
 	$imgArray = ['image' => $imgPath];
 
 	}
 
-	auth()->user()->profile->update(array_merge($data, $imgArray ?? []));
+	auth()->user()->profile->update(array_merge($this->validateData(), $imgArray ?? []));
 
 	return redirect("/profile/$user->id");
 
+	}
+	
+	protected function validateData(){
+	  return request()->validate([
+		'title' => 'required',
+		'description' => 'required',
+		'url' => 'url',
+		'image', '' ]);
 	}
 
 }

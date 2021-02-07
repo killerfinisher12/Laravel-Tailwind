@@ -59,15 +59,16 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show( \App\Post $user)
+    public function show(Post $user)
     {
-      
+      //dd(\App\User::findOrFail(6)->get());
+     //$lol = auth()->user()->likepost->where('id', $user->id)->first();
+     //dd($lol->exists());
+     // dd($user->likepost()->where('post_id', '4')->first());
         $id = Auth::id();
         
         $profile = \App\Profile::where('user_id', $id)->first();
-        //$replies = \App\Reply::where('comment_id', 19)->get();
-       // dd(count($replies));
-        //dd(auth()->user()->id);
+
         return view('Posts.show', compact('user', 'profile'));
     }
 
@@ -100,7 +101,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(\App\Post $user)
+    public function destroy(Post $user)
     { 
       $this->authorize('delete', $user);
        $user->delete();

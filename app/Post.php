@@ -16,11 +16,11 @@ class Post extends Model
 	  return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
 	}
 	
-	public function likepost(){
+/*	public function likepost(){
 	  return $this->hasMany(LikePost::class);
-	}
+	}*/
 	
-	public function follow(){
+	public function likepost(){
 	  return $this->belongsToMany(User::class);
 	}
 	

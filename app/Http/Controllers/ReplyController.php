@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reply;
+use App\Comment;
 class ReplyController extends Controller
 {
     /**
@@ -21,17 +22,11 @@ class ReplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(\App\Comment $comment, $id, Reply $reply)
+    public function create(Comment $comment)
     {
-      //$rep = \App\Comment::findOrFail($id);
-     /* $ly = Reply::where('comment_id', $id)->first();
-      dd($ly->user);*/
-    $user = \App\User::first();
-    
-     $comment = $comment->where('id', $id)->first();
-    $replies = Reply::where('comment_id', $id)->get();
 
-        return view('Replies.reply', compact('comment', 'replies'));
+    $replies = Reply::where('comment_id', $comment->id)->get();
+    return view('Replies.reply', compact('comment', 'replies'));
     }
 
     /**
@@ -58,11 +53,7 @@ class ReplyController extends Controller
      */
     public function show(Reply $reply)
     {
-       //$rep =  Reply::where('comment_id', 10)->first();
-       $comment = \App\Comment::get();
-       $com = $comment->reply;
-       dd($com);
-       //dd($rep->user->name);
+       
     }
 
     /**

@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\User;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -20,17 +19,10 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\Response
      */
-   /* public function index($user)
-    {
-	$user = User::findOrFail($user);
-        return view('profile', ['user' => $user]);
-   }*/
-
     public function index()
-    {                                                   $user = Auth::user();
-	return view('profile', ['user' => $user]);                                                  }
-
-
+    {
+        return view('home');
+    }
 }
