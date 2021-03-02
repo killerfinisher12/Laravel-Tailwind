@@ -23,7 +23,12 @@ class ProfilesController extends Controller
 	public function index(User $user) {
 	//	$user = User::findOrFail($user);
 		//dd(User::find(3)->following()->where('profile_user.user_id', 3)->get());
-		return view('profile' , ['user' => $user]);
+		//return response()->json($user);
+		
+		//return $user->id;
+		$follows = auth()->user() ? auth()->user()->following->contains($user->id) : false;
+		//return $follows;
+		return view('profile' , compact(['user', 'follows']));
 	}
 
 	public function edit(User $user){

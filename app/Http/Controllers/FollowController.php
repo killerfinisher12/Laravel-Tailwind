@@ -32,15 +32,17 @@ class FollowController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $userid)
     {
-      //return auth()->id();
+      //return request($profile_id);
      // dd(request('profile_id'));
-      $data = request()->validate([
+     //return $profile_id;
+      /*$data = request()->validate([
         'profile_id' => 'required'
-        ]);
-      auth()->user()->following()->toggle($data);
-      return redirect()->back();
+        ]);*/
+      $follow = auth()->user()->following()->toggle($userid);
+      return $follow;
+     // return redirect()->back();
     }
 
     /**

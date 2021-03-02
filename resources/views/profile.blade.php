@@ -16,24 +16,16 @@
 
 @if(auth()->id() != $user->profile->id)
 <div class="">
-  <form method="POST" action="/follow">
-    @csrf
-    <input type="hidden" name="profile_id" value="{{$user->profile->id}}">
     
-    
-      @if(auth()->user()->following()->where('profile_user.user_id', auth()->id())->where('profile_id', request()->user->id)->exists())
-      
-    <button type="submit" class="btn bg-gray-300 focus:outline-none">Following</button>
-    @else
-    <button class="btn focus:outline-none  focus:shadow-outline" type="submit">Follow</button>
-    @endif
-    
+
+    <follow-button userid="{{$user->profile->id}}" follows="{{$follows}}">
+      @csrf
+    </follow-button>
     
   </form>
 </div>
 @endif
 
-<!--<follow-button user-id="{{$user->profile->id}}"></follow-button> -->
 
 @can('update', $user->profile)
 <div class="mb-3">                                  <a  href="/profile/{{ $user->id }}/edit" class="text-blue-400 hover:text-blue-600">

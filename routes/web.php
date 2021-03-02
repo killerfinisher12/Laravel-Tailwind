@@ -27,13 +27,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/profile/{user}', 'ProfilesController@index');
+
 
 Route::get('/post/create', 'PostsController@create');
 Route::post('/post', 'PostsController@store');
 Route::get('/post/{user}', 'PostsController@show');
 Route::delete('/post/{user}/delete', 'PostsController@destroy');
 
+
+Route::get('/profile/{user}', 'ProfilesController@index');
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
 Route::patch('/profile/{user}', 'ProfilesController@update');
 
