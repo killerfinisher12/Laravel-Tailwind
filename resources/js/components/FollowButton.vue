@@ -7,10 +7,10 @@
       <input type="hidden" name="profile_id" v-model="profile_id">
   
       <button type="submit" class="btn btn-primary" v-text="followStatus"  :class="{following: status}"></button>
-      <span @click="showPost">clixk</span>
+      
   </form>
     </div>
-  
+    
     </div>
 </template>
 
@@ -20,7 +20,6 @@
       
       data(){
         return{
-          result: '',
           status: this.follows,
         }
       },

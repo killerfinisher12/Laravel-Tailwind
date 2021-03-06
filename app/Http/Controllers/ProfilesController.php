@@ -27,8 +27,10 @@ class ProfilesController extends Controller
 		
 		//return $user->id;
 		$follows = auth()->user() ? auth()->user()->following->contains($user->id) : false;
-		//return $follows;
-		return view('profile' , compact(['user', 'follows']));
+		$userpost = $user->posts->count();
+		$userfollower = $user->profile->follow->count();
+		$userfollowing = $user->following->count();
+		return view('profile' , compact(['user', 'follows', 'userpost', 'userfollower', 'userfollowing']));
 	}
 
 	public function edit(User $user){

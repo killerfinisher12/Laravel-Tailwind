@@ -22,7 +22,7 @@
       @csrf
     </follow-button>
     
-  </form>
+  
 </div>
 @endif
 
@@ -52,6 +52,7 @@ Edit Profile</a>                                </div>
 </div>
 
 <div class="flex justify-center  pt-2 col-12">
+  <Count userpost="{{$userpost}}" userfollower="{{$userfollower}}" userfollowing="{{$userfollowing}}"></Count>
 <div class="pr-3"><strong>{{ $user->posts->count() }} </strong>Posts</div>
 <div class="pr-3"><strong>{{$user->profile->follow->count()}} </strong>Followers</div>
 
